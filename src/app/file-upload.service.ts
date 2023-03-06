@@ -25,7 +25,7 @@ upload(file: File):Observable<any> {
   uploadFile(file: File): Observable<any> {
 	const formData = new FormData();
 	formData.append('myfilebyc', file);
-	return this.http.post<any>(`${this.baseApiUrl}`, formData, { observe: 'response' });
+	return this.http.post<any>(this.baseApiUrl, file);
   }
 
 }
