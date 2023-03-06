@@ -1,0 +1,21 @@
+<div class="drop-zone" (dragover)="onDragOver($event)" (dragleave)="onDragLeave($event)" (drop)="onDrop($event)">
+  <div class="drop-message" *ngIf="!isDragging">
+    <mat-icon class="mat-48">cloud_upload</mat-icon>
+    <p>Arrastra y suelta un archivo aquí o haz clic para seleccionarlo</p>
+    <p class="small">(Solo se permiten archivos de hasta 5 MB)</p>
+    <mat-progress-bar mode="indeterminate" *ngIf="uploading"></mat-progress-bar>
+  </div>
+  <div class="drop-message" *ngIf="isDragging">
+    <mat-icon class="mat-48">file_copy</mat-icon>
+    <p>Suelta el archivo aquí</p>
+  </div>
+  <mat-card *ngIf="uploadedFiles.length > 0">
+    <mat-card-content>
+      <h2>Archivos subidos:</h2>
+      <ul>
+        <li *ngFor="let file of uploadedFiles">{{ file.name }}</li>
+      </ul>
+      <button mat-raised-button color="primary" (click)="clearUploadedFiles()">Subir más archivos</button>
+    </mat-card-content>
+  </mat-card>
+</div>

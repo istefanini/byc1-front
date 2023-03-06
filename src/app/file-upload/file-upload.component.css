@@ -1,0 +1,63 @@
+.drop-zone {
+  border: 2px dashed #ccc;
+  border-radius: 3px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.drop-message {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #ccc;
+  margin-bottom: 10px;
+}
+
+.drop-message p.small {
+  font-size: 0.8rem;
+}
+
+.drop-zone {
+  border: 2px dashed #ccc;
+  border-radius: 3px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.drop-message {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #ccc;
+  margin-bottom: 10px;
+}
+
+.drop-message p.small {
+  font-size: 0.8rem;
+}
+
+.mat-48 {
+  font-size: 48px;
+  margin-bottom: 16px;
+}
+
+mat-card {
+  margin-top: 24px;
+  width: 80%;
+}
+
+mat-card-content {
+  text-align: center;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
