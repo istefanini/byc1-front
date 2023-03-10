@@ -1,7 +1,4 @@
-.drop-zone {
-  border: 2px dashed #ccc;
-  border-radius: 3px;
-  height: 200px;
+.text-center{
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -9,28 +6,28 @@
   cursor: pointer;
 }
 
-.drop-message {
-  text-align: center;
-  font-size: 1.2rem;
-  color: #ccc;
-  margin-bottom: 10px;
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: -webkit-fill-available;
 }
 
-.drop-message p.small {
-  font-size: 0.8rem;
-}
-
+/* Estilos para la zona de drag and drop */
 .drop-zone {
   border: 2px dashed #ccc;
-  border-radius: 3px;
-  height: 200px;
+  border-radius: 20px;
+  min-height: 300px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  margin-bottom: 50px; /* Espacio entre la zona de drag and drop y el resto del contenido */
 }
 
+/* Estilos para los mensajes dentro de la zona de drag and drop */
 .drop-message {
   text-align: center;
   font-size: 1.2rem;
@@ -47,9 +44,25 @@
   margin-bottom: 16px;
 }
 
+.uploaded-files {
+  font-size: 0.8rem;
+  color: #ccc;
+}
+
+/* Estilos para el botón dentro de la tarjeta */
+button {
+  margin-top: 20px;
+}
+
 mat-card {
-  margin-top: 24px;
-  width: 80%;
+  width: 33%;
+}
+
+mat-card-actions {
+  margin-left:auto;
+  margin-right: auto;
+  padding:0%;
+  padding-bottom: 10px;
 }
 
 mat-card-content {
@@ -60,4 +73,50 @@ ul {
   list-style: none;
   padding: 0;
   margin: 0;
+}
+
+::ng-deep .snackbar-success {
+  background: #43a047;
+  color: #fff;
+}
+
+::ng-deep .snackbar-error {
+  background: #d32f2f;
+  color: #fff;
+}
+
+.example-header-image {
+  background-image: url('https://www.fleni.org.ar/wp-content/uploads/2022/11/Logo-Fleni-126.png');
+  background-size: cover;
+}
+
+.css-selector {
+  background: rgb(0,212,255);
+  background: linear-gradient(231deg, rgba(0,212,255,1) 0%, rgba(0,56,101,1) 100%);
+}
+
+.last-uploaded-card {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 20px;
+  background-color: #f5f5f5;
+  padding: 10px;
+  border-radius: 5px;
+  font-weight: bold;
+  max-width:15%;
+}
+
+.process-button{
+  align-self: center;
+  color:#ccc;
+  background-color: #d32f2f;
+}
+
+.display-grid{
+  display: grid;
+}
+
+.mat-card>.mat-card-actions:last-child {
+  padding-bottom: 8px;
 }

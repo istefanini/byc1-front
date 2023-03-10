@@ -1,21 +1,45 @@
-<div class="drop-zone" (dragover)="onDragOver($event)" (dragleave)="onDragLeave($event)" (drop)="onDrop($event)">
-  <div class="drop-message" *ngIf="!isDragging">
-    <mat-icon class="mat-48">cloud_upload</mat-icon>
-    <p>Arrastra y suelta un archivo aquí o haz clic para seleccionarlo</p>
-    <p class="small">(Solo se permiten archivos de hasta 5 MB)</p>
-    <mat-progress-bar mode="indeterminate" *ngIf="uploading"></mat-progress-bar>
-  </div>
-  <div class="drop-message" *ngIf="isDragging">
-    <mat-icon class="mat-48">file_copy</mat-icon>
-    <p>Suelta el archivo aquí</p>
-  </div>
-  <mat-card *ngIf="uploadedFiles.length > 0">
+<div class="container text-center css-selector">
+  
+  <!-- Nueva card -->
+  <mat-card class="last-uploaded-card">
     <mat-card-content>
-      <h2>Archivos subidos:</h2>
-      <ul>
-        <li *ngFor="let file of uploadedFiles">{{ file.name }}</li>
-      </ul>
-      <button mat-raised-button color="primary" (click)="clearUploadedFiles()">Subir más archivos</button>
+      <div class="uploaded-files">Última vez que se subió un archivo: 12/12/2022</div>
     </mat-card-content>
+    <mat-card-actions class="display-grid">
+      <button mat-raised-button class="process-button">Ejecutar proceso</button>
+    </mat-card-actions>
+  </mat-card>
+  
+  <mat-card class="example-card">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>BYC1: DRAG & DROP</mat-card-title>
+      <mat-card-subtitle>Luego de subir un archivo (una planilla de Excel), automaticamente se copian las filas del archivo a una tabla de SQL Server y luego se ejecuta un proceso especifico que calcula costos.</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content class="centrar">
+      <div class="drop-zone" (dragover)="onDragOver($event)" (dragleave)="onDragLeave($event)" (drop)="onDrop($event)">
+        <div class="drop-message" *ngIf="!isDragging">
+          <mat-icon class="mat-48">cloud_upload</mat-icon>
+          <p>Arrastre y suelte un archivo aquí</p>
+          <p class="small">(Solo se permiten archivos .xlsx de hasta 5 MB)</p>
+          <mat-progress-bar mode="indeterminate" *ngIf="uploading"></mat-progress-bar>
+        </div>
+        <div class="drop-message" *ngIf="isDragging">
+          <mat-icon class="mat-48">file_copy</mat-icon>
+          <p>Suelte el archivo aquí</p>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <div class="uploaded-files" *ngIf="uploadedFiles.length > 0">
+        <div>
+          <p>Archivo subido: {{ uploadedFiles[0].name }}</p>
+          <!-- <ul>
+            <li *ngFor="let file of uploadedFiles">{{ file.name }}</li>
+          </ul> -->
+          <!-- <button mat-raised-button color="primary" (click)="clearUploadedFiles()">Subir más archivos</button> -->
+        </div>
+      </div>
+    </mat-card-actions>
   </mat-card>
 </div>

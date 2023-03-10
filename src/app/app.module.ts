@@ -8,6 +8,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatCardModule } from '@angular/material/card';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+
 	
 @NgModule({
 declarations: [
@@ -21,7 +23,8 @@ imports: [
 	MatIconModule,
     MatButtonModule,
     MatProgressBarModule,
-    MatCardModule
+    MatCardModule,
+	MatSnackBarModule
 ],
 providers: [],
 bootstrap: [AppComponent]
