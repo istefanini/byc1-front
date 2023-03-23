@@ -1,29 +1,50 @@
 
 import { HttpClient, HttpEventType } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Injectable, ViewEncapsulation} from '@angular/core';
 import { FileUploadService } from '../file-upload.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {MatStepperIntl} from '@angular/material/stepper';
+import { Observable } from 'rxjs';
   
 
 @Component({
     selector: 'app-file-upload',
     templateUrl: './file-upload.component.html',
-    styleUrls: ['./file-upload.component.css']
+    styleUrls: ['./file-upload.component.css'],
+    encapsulation: ViewEncapsulation.None,
+    providers: [{provide: MatStepperIntl, useClass: MatStepperIntl}],
 })
 export class FileUploadComponent implements OnInit {
+
+    firstFormGroup = this._formBuilder.group({
+      firstCtrl: ['', Validators.required],
+    });
+    secondFormGroup = this._formBuilder.group({
+      secondCtrl: ['', Validators.required],
+    });
 
     isDragging = false;
     uploading = false;
     uploadedFiles: File[] = [];
+    periodos : any[] = [{}];
 
-    constructor(private fileUploadService: FileUploadService, private http: HttpClient, private snackbar: MatSnackBar) { }
+    constructor(private fileUploadService: FileUploadService, private http: HttpClient, private snackbar: MatSnackBar, private _formBuilder: FormBuilder, private _matStepperIntl: MatStepperIntl) { }
   
-    ngOnInit(): void {
-    }
+      ngOnInit(): void {
+        this.getPeriods().subscribe(data=> {
+          this.periodos = data.Periodos; 
+          console.log(data);
+        });
+      }
+
+      updateOptionalLabel() {
+        this._matStepperIntl.changes.next();
+      }
   
-    onDragOver(event: DragEvent): void {
-        event.preventDefault();
-        this.isDragging = true;
+      onDragOver(event: DragEvent): void {
+          event.preventDefault();
+          this.isDragging = true;
       }
     
       onDragLeave(event: DragEvent): void {
@@ -46,31 +67,31 @@ export class FileUploadComponent implements OnInit {
         this.uploadedFiles = [];
       }
 
-    uploadFiles(files: FileList): void {
-        const url = 'http://localhost:3000/sendfilebyc';
-        const formData = new FormData();
-          const file = files[0];
-          if (file.size <= 5242880) { // 5 MB
-            formData.append('myfilebyc', file);
-          }
-          this.uploading=true;
-        this.http.post(url, formData, { reportProgress: true, observe: 'events' }).subscribe(
-          (event: any) => {
-            if (event.type === HttpEventType.Response) {
-              if (event.status === 200) {
-                this.uploadedFiles = Array.from(files);
-                this.showSnackBar(event.body.msg, 'success');
-              } else {
-                this.showSnackBar(event.body.msg, 'error');
+      uploadFiles(files: FileList): void {
+          const url = 'http://localhost:3000/sendfilebyc';
+          const formData = new FormData();
+            const file = files[0];
+            if (file.size <= 5242880) { // 5 MB
+              formData.append('myfilebyc', file);
+            }
+            this.uploading=true;
+          this.http.post(url, formData, { reportProgress: true, observe: 'events' }).subscribe(
+            (event: any) => {
+              if (event.type === HttpEventType.Response) {
+                if (event.status === 200) {
+                  this.uploadedFiles = Array.from(files);
+                  this.showSnackBar(event.body.msg, 'success');
+                } else {
+                  this.showSnackBar(event.body.msg, 'error');
+                }
+                this.uploading = false;
               }
+            },
+            () => {
+              this.showSnackBar('Error al subir el archivo', 'error');
               this.uploading = false;
             }
-          },
-          () => {
-            this.showSnackBar('Error al subir el archivo', 'error');
-            this.uploading = false;
-          }
-        );
+          );
       }
 
       showSnackBar(message: string, panelClass: 'success' | 'error') {
@@ -78,6 +99,10 @@ export class FileUploadComponent implements OnInit {
           duration: 6000,
           panelClass: panelClass === 'success' ? 'snackbar-success' : 'snackbar-error',
         });
+      }
+
+      getPeriods():Observable<any>{
+        return this.http.get<any>("http://localhost:3000/getPeriodos");
       }
 }
 

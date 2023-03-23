@@ -18,13 +18,13 @@
 .drop-zone {
   border: 2px dashed #ccc;
   border-radius: 20px;
-  min-height: 300px;
+  min-height: 200px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  margin-bottom: 50px; /* Espacio entre la zona de drag and drop y el resto del contenido */
+  /* margin-bottom: 50px; Espacio entre la zona de drag and drop y el resto del contenido */
 }
 
 /* Estilos para los mensajes dentro de la zona de drag and drop */
@@ -56,6 +56,8 @@ button {
 
 mat-card {
   width: 33%;
+  max-height: 70%;
+  min-height: 70%;
 }
 
 mat-card-actions {
@@ -117,6 +119,22 @@ ul {
   display: grid;
 }
 
-.mat-card>.mat-card-actions:last-child {
+.mat-card.mat-card-actions:last-child {
   padding-bottom: 8px;
+}
+
+.mat-step-header.mat-horizontal-stepper-header:last-child {
+  max-height: 40px !important;
+}
+
+.mat-horizontal-content-container{
+  padding: 0 24px 0 24px !important;
+}
+
+.mat-step-header .mat-step-label {
+  display: contents !important;
+}
+
+.btn-stepper{
+  margin-bottom: 20px;
 }
